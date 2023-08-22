@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
+REQUIRE_SAMPLE_REUSE=0
 PPATH=$(realpath ..)
-. ../testdata_tools/gen.sh
+. ../../testdata_tools/gen.sh
 
 ulimit -s unlimited
 
-use_solution parking.cpp
+use_solution sol.cpp
 
 MAXN=200000
 
@@ -18,104 +19,19 @@ sample 2
 
 group group1 8
 limits maxn=5 subtask=1
-tc_manual ../manual_tests/parking.1a.in
-tc_manual ../manual_tests/parking.1b.in
-tc_manual ../manual_tests/parking.1c.in
-tc_manual ../manual_tests/parking.1d.in
-tc_manual ../manual_tests/parking.1e.in
-tc_manual ../manual_tests/parking.1f.in
-tc_manual ../manual_tests/parking.1g.in
-tc_manual ../manual_tests/parking.1h.in
-tc_manual ../manual_tests/parking.1i.in
-tc_manual ../manual_tests/parking.1j.in
-
+tc_manual ../manual_tests/subtaska/01a
+tc_manual ../manual_tests/subtaska/02a
+tc_manual ../manual_tests/subtaska/03a
+tc_manual ../manual_tests/subtaska/04a
+tc_manual ../manual_tests/subtaska/05a
+tc_manual ../manual_tests/subtaska/06a
+tc_manual ../manual_tests/subtaska/07a
 
 group group2 12
-limits maxn=100 subtask=2
-tc_manual ../manual_tests/parking.2a.in
-tc_manual ../manual_tests/parking.2b.in
-tc_manual ../manual_tests/parking.2c.in
-tc_manual ../manual_tests/parking.2d.in
-tc_manual ../manual_tests/parking.2e.in
+limits maxn=100 subtask=1
+tc_manual ../manual_tests/subtaskb/01b
+tc_manual ../manual_tests/subtaskb/02b
+tc_manual ../manual_tests/subtaskb/03b
+tc_manual ../manual_tests/subtaskb/04b
+tc_manual ../manual_tests/subtaskb/05b
 
-group group3 16
-limits maxn=100 subtask=3
-tc_manual ../manual_tests/parking.3a.in
-tc_manual ../manual_tests/parking.3b.in
-tc_manual ../manual_tests/parking.3c.in
-tc_manual ../manual_tests/parking.3d.in
-tc_manual ../manual_tests/parking.3e.in
-tc_manual ../manual_tests/parking.3f.in
-tc_manual ../manual_tests/parking.3g.in
-tc_manual ../manual_tests/parking.3h.in
-tc_manual ../manual_tests/parking.3i.in
-
-group group4 18
-limits maxn=500 subtask=4
-tc_manual ../manual_tests/parking.4a.in
-tc_manual ../manual_tests/parking.4b.in
-tc_manual ../manual_tests/parking.4c.in
-tc_manual ../manual_tests/parking.4d.in
-tc_manual ../manual_tests/parking.4e.in
-tc_manual ../manual_tests/parking.4f.in
-tc_manual ../manual_tests/parking.4g.in
-tc_manual ../manual_tests/parking.4h.in
-tc_manual ../manual_tests/parking.4i.in
-
-group group5 25
-include_group group3
-limits maxn=1000 maxm=$MAXM no_one=0 m_large=0
-tc_manual ../manual_tests/parking.5a.in
-tc_manual ../manual_tests/parking.5b.in
-tc_manual ../manual_tests/parking.5c.in
-tc_manual ../manual_tests/parking.5d.in
-tc_manual ../manual_tests/parking.5e.in
-tc_manual ../manual_tests/parking.5f.in
-tc_manual ../manual_tests/parking.5g.in
-tc_manual ../manual_tests/parking.5h.in
-tc_manual ../manual_tests/parking.5i.in
-tc_manual ../manual_tests/parking.5j.in
-tc_manual ../manual_tests/parking.5k.in
-tc_manual ../manual_tests/parking.5l.in
-tc_manual ../manual_tests/parking.5m.in
-tc_manual ../manual_tests/parking.5n.in
-tc_manual ../manual_tests/parking.5o.in
-tc_manual ../manual_tests/parking.5p.in
-tc_manual ../manual_tests/parking.5r.in
-tc_manual ../manual_tests/parking.5s.in
-tc_manual ../manual_tests/parking.5t.in
-tc_manual ../manual_tests/parking.5u.in
-tc_manual ../manual_tests/parking.5v.in
-tc_manual ../manual_tests/parking.5w.in
-tc_manual ../manual_tests/parking.5x.in
-
-group group6 15
-include_group sample
-include_group group1
-include_group group2
-include_group group4
-include_group group5
-limits maxn=$MAXN maxm=$MAXM no_one=0 m_large=0
-tc_manual ../manual_tests/parking.6a.in
-tc_manual ../manual_tests/parking.6b.in
-tc_manual ../manual_tests/parking.6c.in
-tc_manual ../manual_tests/parking.6d.in
-tc_manual ../manual_tests/parking.6e.in
-tc_manual ../manual_tests/parking.6f.in
-tc_manual ../manual_tests/parking.6g.in
-tc_manual ../manual_tests/parking.6h.in
-tc_manual ../manual_tests/parking.6i.in
-tc_manual ../manual_tests/parking.6j.in
-tc_manual ../manual_tests/parking.6k.in
-tc_manual ../manual_tests/parking.6l.in
-tc_manual ../manual_tests/parking.6m.in
-tc_manual ../manual_tests/parking.6n.in
-tc_manual ../manual_tests/parking.6o.in
-tc_manual ../manual_tests/parking.6p.in
-tc_manual ../manual_tests/parking.6r.in
-tc_manual ../manual_tests/parking.6s.in
-tc_manual ../manual_tests/parking.6t.in
-tc_manual ../manual_tests/parking.6u.in
-tc_manual ../manual_tests/parking.6v.in
-tc_manual ../manual_tests/parking.6w.in
-tc_manual ../manual_tests/parking.6x.in

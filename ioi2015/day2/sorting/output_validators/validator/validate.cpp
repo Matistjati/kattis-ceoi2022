@@ -40,88 +40,53 @@ int main(int argc, char **argv) {
         int k;
         if(!(sol >> k))
         {
-            author_message("Did not output number of moves");
             feedback("Expected more output");
         }
 
-        vector<pii> spaces = spacesorig;
+        vi permcop = perm;
 
-        pii ret_on_error = pii(k, false); // We can't give WA if they fail here, as they still potentially have 20% score
-        rep(i,0,k) {
+        pii ret = {k,false};
+        if (k>s) feedback("Too many moves");
+        rep(i,0,k)
+        {
             int a,b;
             if(!(sol >> a >> b))
             {
-                author_message("Outputted too few moves");
-                return ret_on_error;
+                feedback("Expected more output");
             }
-            for (auto x : {a,b}) if(x < 1 || x > m)
-            {
-                author_message("Out of bounds");
-                return ret_on_error;
-            }
-            if (a==b)
-            {
-                author_message("You can't move car to same parking spot");
-                return ret_on_error;
-            }
-            a--;
-            b--;
-            if (spaces[b].second!=0)
-            {
-                author_message("Moving to full parking spot");
-                return ret_on_error;
-            }
-            if (spaces[a].first==0)
-            {
-                author_message("Trying to move car from empty parking spot");
-                return ret_on_error;
-            }
-            int col = -1;
-            if (spaces[a].second!=0)
-            {
-                col = spaces[a].second;
-                spaces[a].second = 0;
-            }
-            else
-            {
-                col = spaces[a].first;
-                spaces[a].first = 0;
-            }
-
-            
-            if (spaces[b].first!=0)
-            {
-                if (spaces[b].first!=col)
-                {
-                    
-                    author_message("Trying to move car to spot with different color");
-                    return ret_on_error;
-                }
-                spaces[b].second = col;
-            }
-            else spaces[b].first = col;
+            if (a<0||b<0||a>=n||b>=n) feedback("Out of bounds");
+            swap(permcop[swaps[i].first], permcop[swaps[i].second]);
+            swap(permcop[a], permcop[b]);
         }
+
 
         
         bool works = 1;
-        for (int i = 0; i < m; i++)
+        for (int i = 0; i < n-1; i++)
         {
-            works &= spaces[i].first==spaces[i].second;
+            works &= permcop[i]<permcop[i+1];
         }
+        ret.second = works;
 
+        string kkk = "";
+        for (int i = 0; i <n;i++)
+        {
+            kkk+=to_string(permcop[i]);
+        }
+        if (!works) feedback(kkk.c_str());
         string trailing;
         if(sol >> trailing)
         {
-            author_message("Outputted more than K lines of moves");
-            return ret_on_error; //feedback("Trailing output");
+            feedback("Trailing output");
         }
-        return pii(k,works);
+        return ret;
     };
 
     pii judge = check(judge_ans, judge_error);
     pii author = check(author_out, wrong_answer);
 
-
+    if (!get<1>(judge)) judge_error("Judge did not find solution");
+    bool needbest = s==3*n;
     if (get<0>(author) < get<0>(judge))
     {
         if (get<1>(author)) judge_error("Contestant found better solution");
@@ -130,19 +95,21 @@ int main(int argc, char **argv) {
             wrong_answer("Did not identify the correct amount of moves");
         }
     }
-    if (get<0>(author) > get<0>(judge)) 
+
+    if (needbest && get<0>(author) > get<0>(judge)) 
     {
-        author_message("Did not identify the correct amount of moves");
         wrong_answer("Did not identify the correct amount of moves");
     }
-    
-    // Same number of moves
-    bool correctdecision = get<1>(judge)==get<1>(author);
-    if (!correctdecision)
+    if (get<0>(author)>s)
     {
-        author_message("Correct number of moves, but moves are incorrect");
-        accept_with_score(0.2);
+        wrong_answer("Too many moves");
     }
 
-    accept_with_score(1.0);
+    if (!get<1>(author))
+    {
+        wrong_answer("Did not produce correct answer");
+    }
+
+    cerr << "AC";
+    accept();
 }
